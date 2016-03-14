@@ -21,7 +21,8 @@ void ofApp::setup(){
     movingManager->load("mapper.xml");
     
     movingManager->setupGui();
-    receiver.setup(3003);
+    receiver.setup(3021);
+//    sender.setup("localhost", 51001);
     sender.setup("localhost", 7701);
     
     for(int i=0; i<MOVING_NUM; i++){
@@ -37,13 +38,29 @@ void ofApp::update(){
 		ofxOscMessage m;
 		receiver.getNextMessage(m);
         
-		// check for mouse moved message
         for(int i=0; i<MOVING_NUM; i++){
-    		if(m.getAddress() == "/movingManager/" + ofToString(i)){
-    			// both the arguments are int32's
-                receivedPoint[i].x = m.getArgAsInt32(0);
-                receivedPoint[i].y = m.getArgAsInt32(1);
+    		if(m.getAddress() == "/movingManager/" + ofToString(i) + "/point"){
+                receivedPoint[i].x = m.getArgAsFloat(0);
+                receivedPoint[i].y = m.getArgAsFloat(1);
     		}
+            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/color"){
+                color[i] = m.getArgAsString(0);
+                dmx[i]->setColor(color[i]);
+            }
+            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/gobo"){
+                gobo[i] = m.getArgAsString(0);
+                dmx[i]->setGobo(gobo[i]);
+            }
+            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/strobe"){
+                strobe[i] = m.getArgAsFloat(0);
+                dmx[i]->setStrobe(strobe[i]);
+            }
+            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/dimmer"){
+                dimmer[i] = m.getArgAsFloat(0);
+                dmx[i]->setDimmer(dimmer[i]);
+            }
+
+
         }
 	}
 
@@ -89,6 +106,7 @@ void ofApp::draw(){
     }
     //cam.end();
     ofDrawBitmapStringHighlight("mode " + ofToString(honbanMode), 0,660);
+    ofDrawBitmapStringHighlight("kado " + ofToString(kadoNum),    0,680);
 }
 
 

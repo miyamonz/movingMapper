@@ -36,7 +36,13 @@ class ofApp : public ofBaseApp{
     
     ofxOscReceiver receiver;
     ofxOscSender sender;
+    
     ofPoint receivedPoint[MOVING_NUM];
+    string  color[MOVING_NUM];
+    string  gobo[MOVING_NUM];
+    float   strobe[MOVING_NUM];
+    float   dimmer[MOVING_NUM];
+    
     
     bool honbanMode = false;
     float pan[MOVING_NUM];

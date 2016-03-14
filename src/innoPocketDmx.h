@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOsc.h"
+#include "innoPocket.h"
 
 class InnoPocketDmx {
     ofxOscSender sender;
@@ -8,6 +9,12 @@ class InnoPocketDmx {
     
     float pan  =0;
     float tilt =0;
+    
+    int  colorDmx   = 0;
+    int  goboDmx    = 0;
+    int   strobeDmx = 0;
+    int   dimmerDmx = 0;
+    
     
 public:
     InnoPocketDmx(){};
@@ -32,11 +39,25 @@ public:
     float getTilt(){
         return tilt;
     }
-    
+    void setColor(string _color){
+        colorDmx = inno::getDmxFromColorString(_color);
+    }
+    void setGobo(string _gobo){
+        goboDmx = inno::getDmxFromGobo(_gobo);
+    }
+    void setStrobe(float _strobe){
+        strobeDmx = inno::getDmxFromStrobe(_strobe);
+    }
+    void setDimmer(float _dimmer){
+        dimmerDmx = inno::getDmxFromDimmer(_dimmer);
+    }
     void send(){
         sendPan();
         sendTilt();
-        ofLog() << "send " << ofToString(address);
+        sendColor();
+        sendGobo();
+        sendStrobe();
+        sendDimmer();
     }
     
     void sendPan(){
@@ -58,6 +79,30 @@ public:
         m.clear();
         m.setAddress("/dmx/" + ofToString(address+3));
         m.addIntArg((tilt - (int)tilt)*255);
+        sender.sendMessage(m);
+    }
+    void sendColor(){
+        ofxOscMessage m;
+        m.setAddress("/dmx/" + ofToString(address+4));
+        m.addIntArg(colorDmx);
+        sender.sendMessage(m);
+    }
+    void sendGobo(){
+        ofxOscMessage m;
+        m.setAddress("/dmx/" + ofToString(address+5));
+        m.addIntArg(goboDmx);
+        sender.sendMessage(m);
+    }
+    void sendStrobe(){
+        ofxOscMessage m;
+        m.setAddress("/dmx/" + ofToString(address+6));
+        m.addIntArg(strobeDmx);
+        sender.sendMessage(m);
+    }
+    void sendDimmer(){
+        ofxOscMessage m;
+        m.setAddress("/dmx/" + ofToString(address+7));
+        m.addIntArg(dimmerDmx);
         sender.sendMessage(m);
     }
 };

@@ -15,7 +15,7 @@ public:
     virtual ofxXmlComposite* getByTag(string findTag,int  &index)=0;
     virtual ofxXmlComposite* getByTag(string findTag){
         int i=0;
-        getByTag(findTag,i);
+        return getByTag(findTag,i);
     }
 
 };
