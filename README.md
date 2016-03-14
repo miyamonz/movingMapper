@@ -10,4 +10,5 @@ movingManager -> movingMapper -> pan tilt data
 - addon
   - [ofxDatGui](https://github.com/braitsch/ofxDatGui)
   - [ofxQuadWarp](https://github.com/julapy/ofxQuadWarp)
+  - [ofxInnoPocket](https://github.com/miyamonz/ofxInnoPocket)
   
