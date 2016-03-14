@@ -44,7 +44,7 @@ class ofApp : public ofBaseApp{
     float   dimmer[MOVING_NUM];
     
     
-    bool honbanMode = false;
+    bool honbanMode = true;
     float pan[MOVING_NUM];
     float tilt[MOVING_NUM];
     

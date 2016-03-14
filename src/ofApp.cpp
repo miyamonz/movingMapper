@@ -1,6 +1,9 @@
 
 #include "ofApp.h"
 #include "InnoPocketDmx.h"
+#define PORTR 3021
+#define PORTS 51001
+
 InnoPocketDmx* dmx[MOVING_NUM];
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -21,9 +24,9 @@ void ofApp::setup(){
     movingManager->load("mapper.xml");
     
     movingManager->setupGui();
-    receiver.setup(3021);
-//    sender.setup("localhost", 51001);
-    sender.setup("localhost", 7701);
+    receiver.setup(PORTR);
+    sender.setup("localhost", PORTS);
+//    sender.setup("localhost", 7701);
     
     for(int i=0; i<MOVING_NUM; i++){
         dmx[i] = new InnoPocketDmx(sender, 101+11*i);
@@ -105,8 +108,10 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight(ofToString(dmx[i]->getPan()) + " " + ofToString(dmx[i]->getTilt()),200*i, 500);
     }
     //cam.end();
-    ofDrawBitmapStringHighlight("mode " + ofToString(honbanMode), 0,660);
-    ofDrawBitmapStringHighlight("kado " + ofToString(kadoNum),    0,680);
+    ofDrawBitmapStringHighlight("receive " + ofToString(PORTR), 0,620);
+    ofDrawBitmapStringHighlight("send    " + ofToString(PORTS), 0,640);
+    ofDrawBitmapStringHighlight("mode    " + ofToString(honbanMode), 0,660);
+    ofDrawBitmapStringHighlight("kado    " + ofToString(kadoNum),    0,680);
 }
 
 
