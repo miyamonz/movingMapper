@@ -12,6 +12,7 @@ public:
     virtual void save(ofxXmlSettings &xml) = 0;
     virtual void load(ofxXmlSettings &xml,int i) = 0;
     virtual void setupGui(ofxDatGui* gui,int i) = 0;
+    virtual void setupGui(int i) = 0;
     virtual ofxXmlComposite* getByTag(string findTag,int  &index)=0;
     virtual ofxXmlComposite* getByTag(string findTag){
         int i=0;
@@ -57,6 +58,11 @@ public:
         }
         xml.popTag();
     }
+    virtual void setupGui(int i){
+        for(int i=0; i<elements.size(); i++){
+            elements[i]->setupGui(i);
+        }
+    }
     void setupGui(ofxDatGui* gui,int i){
         for(int i=0;i<elements.size(); i++){
             elements[i]->setupGui(gui,i);
@@ -95,6 +101,7 @@ public:
     void drawGui(){};
     virtual void save(ofxXmlSettings &xml){};
     virtual void load(ofxXmlSettings &xml, int i){};
+    virtual void setupGui(int i){};
     virtual void setupGui(ofxDatGui* gui, int i){};
     virtual ofxXmlComposite* getByTag(string findTag, int &index){
         ofxXmlComposite* r = nullptr;

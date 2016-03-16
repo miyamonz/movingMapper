@@ -82,7 +82,7 @@ public:
     
     ofxDatGui* gui;
     int width = 200;
-    void setupGui(ofxDatGui* gui, int i){
+    void setupGui(int i){
         this->gui = new ofxDatGui();
         this->gui->addHeader(tagName+ofToString(i));
         this->gui->setPosition(i*(width+10),0);
@@ -131,8 +131,7 @@ public:
         ofxXmlCompositePack::load(xml,0);
     }
     void setupGui(){
-        ofxDatGui* gui;
-        ofxXmlCompositePack::setupGui(gui,0);
+        ofxXmlCompositePack::setupGui(0);
     }
     ofxXmlComposite* getByTag(string tagname, int index){
         return ofxXmlCompositePack::getByTag(tagname, index);
