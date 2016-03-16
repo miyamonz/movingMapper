@@ -8,7 +8,6 @@
 class DegValue : public ofxXmlCompositeLeaf {
 public:
     float val;
-    ofxDatGui* gui;
     ofxDatGuiSlider* sl;
     float min , max;
     DegValue(string tagName,float min,float max) : ofxXmlCompositeLeaf(tagName) {
@@ -32,8 +31,6 @@ public:
     void load(ofxXmlSettings &xml,int i){
         float xmlval = xml.getValue(tagName,0.);
         val = xmlval;
-        //sl->setValue(xmlval);
-        
     }
     void sliderEvent(){
         
@@ -82,6 +79,7 @@ public:
         warper.setCorner(ofPoint(0,h),3);
         warper.setup();
     }
+    
     ofxDatGui* gui;
     int width = 200;
     void setupGui(ofxDatGui* gui, int i){
@@ -119,7 +117,6 @@ public:
     string fileName;
     int width = 200;
     ofxXmlSettings xml;
-    //ofxDatGui* gui;
     
     MovingManager(string tagName) :ofxXmlCompositePack(tagName) {
     }
