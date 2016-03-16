@@ -79,13 +79,19 @@ public:
         warper.setCorner(ofPoint(0,h),3);
         warper.setup();
     }
+    int guix=0;
+    int guiy=0;
+    void setGuiPosition(int x, int y){
+        guix = x;
+        guiy = y;
+    }
     
     ofxDatGui* gui;
     int width = 200;
     void setupGui(int i){
         this->gui = new ofxDatGui();
         this->gui->addHeader(tagName+ofToString(i));
-        this->gui->setPosition(i*(width+10),0);
+        this->gui->setPosition(guix + i*(width+10),guiy);
         this->gui->setWidth(width);
         for(int j=0; j<elements.size();j++){
             elements[j]->setupGui(this->gui,j);

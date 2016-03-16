@@ -13,6 +13,7 @@ void ofApp::setup(){
     movingManager = new MovingManager("manager");
     for(int i=0; i<MOVING_NUM;i++){
         RectMapper* rm = new RectMapper("moving");
+        rm->setGuiPosition(40,0);
         for(int j=0; j<ANCOUR_NUM; j++) {
             MapperPoint* m  = new MapperPoint("pt");
             m->add(new DegValue("pan",0,540));
@@ -42,23 +43,23 @@ void ofApp::update(){
 		receiver.getNextMessage(m);
         
         for(int i=0; i<MOVING_NUM; i++){
-    		if(m.getAddress() == "/movingManager/" + ofToString(i) + "/point"){
+    		if(m.getAddress() == "/toMapper/" + ofToString(i) + "/point"){
                 receivedPoint[i].x = m.getArgAsFloat(0);
                 receivedPoint[i].y = m.getArgAsFloat(1);
     		}
-            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/color"){
+            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/color"){
                 color[i] = m.getArgAsString(0);
                 dmx[i]->setColor(color[i]);
             }
-            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/gobo"){
+            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/gobo"){
                 gobo[i] = m.getArgAsString(0);
                 dmx[i]->setGobo(gobo[i]);
             }
-            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/strobe"){
+            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/strobe"){
                 strobe[i] = m.getArgAsFloat(0);
                 dmx[i]->setStrobe(strobe[i]);
             }
-            if(m.getAddress() == "/movingManager/" + ofToString(i) + "/dimmer"){
+            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/dimmer"){
                 dimmer[i] = m.getArgAsFloat(0);
                 dmx[i]->setDimmer(dimmer[i]);
             }
@@ -89,8 +90,6 @@ void ofApp::draw(){
         rect->warper.draw();
         ofPoint calc = rect->getCalculatedPoint(receivedPoint[i]);
         
-        
-        
         ofDrawCircle(calc, 10);
         rect->toPanTilt(calc, pan, tilt);
         
@@ -108,10 +107,11 @@ void ofApp::draw(){
         ofDrawBitmapStringHighlight(ofToString(dmx[i]->getPan()) + " " + ofToString(dmx[i]->getTilt()),200*i, 500);
     }
     //cam.end();
-    ofDrawBitmapStringHighlight("receive " + ofToString(PORTR), 0,620);
-    ofDrawBitmapStringHighlight("send    " + ofToString(PORTS), 0,640);
-    ofDrawBitmapStringHighlight("mode    " + ofToString(honbanMode), 0,660);
-    ofDrawBitmapStringHighlight("kado    " + ofToString(kadoNum),    0,680);
+    int y = 600;
+    ofDrawBitmapStringHighlight("receive " + ofToString(PORTR),      0,y += 20);
+    ofDrawBitmapStringHighlight("send    " + ofToString(PORTS),      0,y += 20);
+    ofDrawBitmapStringHighlight("mode    " + ofToString(honbanMode), 0,y += 20);
+    ofDrawBitmapStringHighlight("kado    " + ofToString(kadoNum),    0,y += 20);
 }
 
 
