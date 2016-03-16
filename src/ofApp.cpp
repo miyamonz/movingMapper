@@ -1,7 +1,7 @@
 
 #include "ofApp.h"
 #include "InnoPocketDmx.h"
-#define PORTR 3021
+#define PORTR 3210
 #define PORTS 51001
 
 InnoPocketDmx* dmx[MOVING_NUM];
