@@ -50,24 +50,24 @@ void ofApp::update(){
         receiver.getNextMessage(m);
         for(int k=0; k<2; k++){
         for(int i=0; i<MOVING_NUM; i++){
-            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/point"){
+            if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/point"){
                 receivedPoint[i].x = m.getArgAsFloat(0);
                 receivedPoint[i].y = m.getArgAsFloat(1);
             }
-            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/color"){
+            if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/color"){
                 color[i] = m.getArgAsString(0);
                 dmx[MOVING_NUM*k + i]->setColor(color[i]);
                 dmx[MOVING_NUM*k + i]->setColor(color[i]);
             }
-            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/gobo"){
+            if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/gobo"){
                 gobo[i] = m.getArgAsString(0);
                 dmx[MOVING_NUM*k + i]->setGobo(gobo[i]);
             }
-            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/strobe"){
+            if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/strobe"){
                 strobe[i] = m.getArgAsFloat(0);
                 dmx[MOVING_NUM*k + i]->setStrobe(strobe[i]);
             }
-            if(m.getAddress() == "/toMapper/" + ofToString(i) + "/dimmer"){
+            if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/dimmer"){
                 dimmer[i] = m.getArgAsFloat(0);
                 dmx[MOVING_NUM*k + i]->setDimmer(dimmer[i]);
             }
