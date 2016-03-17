@@ -30,7 +30,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     ofPoint p;
-    MovingManager* movingManager;
+    MovingManager* movingManager[2];
     ofxDatGui* gui;
     ofEasyCam cam;
     
