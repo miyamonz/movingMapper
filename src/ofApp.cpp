@@ -50,6 +50,7 @@ void ofApp::update(){
         receiver.getNextMessage(m);
         for(int k=0; k<2; k++){
         for(int i=0; i<MOVING_NUM; i++){
+            //ofLog() << m.getAddress();
             if(m.getAddress() == "/toMapper/"+ ofToString(k) + "/" + ofToString(i) + "/point"){
                 receivedPoint[i].x = m.getArgAsFloat(0);
                 receivedPoint[i].y = m.getArgAsFloat(1);
