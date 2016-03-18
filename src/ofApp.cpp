@@ -104,6 +104,8 @@ void ofApp::draw(){
             rect->toPanTilt(calc, pan, tilt);
             
             if(honbanMode){
+                if(kadoNum < 4 && k==1) break;
+                if(kadoNum >= 4 && k==0) break;
                 dmx[MOVING_NUM*k + i]->setPan(pan);
                 dmx[MOVING_NUM*k + i]->setTilt(tilt);
                 dmx[MOVING_NUM*k + i]->send();
